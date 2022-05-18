@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    id "com.avast.gradle.docker-compose" version "0.15.2"
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.jooq:jooq:3.14.15'
+    implementation 'org.jooq:jooq-codegen:3.14.15'
+    implementation 'org.postgresql:postgresql:42.3.5'
+
+    implementation 'com.fasterxml.jackson.core:jackson-core:2.13.2'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.2.1'
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.13.2'
+}
+
+
+dockerCompose {
+    useComposeFiles = ['postgresql.yml']
+    forceRecreate = true
+    removeOrphans = true
+    projectName = 'jooq-postgresql'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src/main/java', 'build/generated/jooq/main']
+        }
+    }
+    generated {
+        java {
+            srcDirs = ['build/generated/jooq/main']
+        }
+    }
+}
