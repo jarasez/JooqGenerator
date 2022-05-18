@@ -27,11 +27,7 @@ public class JooqGenerate {
                                                 .withUserType("jooq.enumeration.Status")
                                                 .withEnumConverter(false)
                                                 .withBinding("jooq.converter.EnumBinding")
-                                                //.withExcludeTypes("source_data_set_status")
-                                                //.withIncludeTypes("source_data_set_status")
-                                                //.withIncludeExpression("source_data_set.status")
                                                 .withTypes("status")
-                                               // .withIncludeExpression(".*\\.status")
 
                                 ))
                         .withStrategy(new Strategy().withName("jooq.generate.CustomGeneratorStrategy"))
